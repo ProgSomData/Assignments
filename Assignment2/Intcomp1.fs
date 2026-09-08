@@ -81,7 +81,7 @@ let rec eval e (env : (string * int) list) : int =
 
 
 let run e = eval e [];;
-let res = List.map run [e1;e2;e3;e4;e5;e7]  (* e6 has free variables *)
+// let res = List.map run [e1;e2;e3;e4;e5;e7]  (* e6 has free variables *)
 
 
 (* ---------------------------------------------------------------------- *)
@@ -102,15 +102,20 @@ let rec closedin (e : expr) (vs : string list) : bool =
     match e with
     | CstI i -> true
     | Var x  -> List.exists (fun y -> x=y) vs
-    | Let(x, erhs, ebody) -> 
-      let vs1 = x :: vs 
-      closedin erhs vs && closedin ebody vs1
+    | Let(xs, ebody) -> 
+        let rec aux bindings vs = 
+            match bindings with
+            | [] -> closedin ebody vs
+            | (x, erhs) :: xs ->
+            let vs1 = x :: vs
+            closedin erhs vs && aux  xs vs1
+        aux xs vs
     | Prim(ope, e1, e2) -> closedin e1 vs && closedin e2 vs;;
 
 (* An expression is closed if it is closed in the empty environment *)
 
-let closed1 e = closedin e [];;
-let _ = List.map closed1 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
+// let closed1 e = closedin e [];;
+// let _ = List.map closed1 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
 
 (* ---------------------------------------------------------------------- *)
 
@@ -133,43 +138,45 @@ let rec remove env x =
 
 (* Naive substitution, may capture free variables: *)
 
-let rec nsubst (e : expr) (env : (string * expr) list) : expr =
-    match e with
-    | CstI i -> e
-    | Var x  -> lookOrSelf env x
-    | Let(x, erhs, ebody) ->
-      let newenv = remove env x
-      Let(x, nsubst erhs env, nsubst ebody newenv)
-    | Prim(ope, e1, e2) -> Prim(ope, nsubst e1 env, nsubst e2 env)
+//outcommented function nsubst until needed - causes compile errors because of let
+
+// let rec nsubst (e : expr) (env : (string * expr) list) : expr =
+//     match e with
+//     | CstI i -> e
+//     | Var x  -> lookOrSelf env x
+//     | Let(x, erhs, ebody) ->
+//       let newenv = remove env x
+//       Let(x, nsubst erhs env, nsubst ebody newenv)
+//     | Prim(ope, e1, e2) -> Prim(ope, nsubst e1 env, nsubst e2 env)
 
 (* Some expressions with free variables: *)
 
-let e6s0 = Prim("+", Var "y", Var "z");;
+// let e6s0 = Prim("+", Var "y", Var "z");;
 
-let e6s1 = nsubst e6s0 [("z", CstI 17)];;
+// let e6s1 = nsubst e6s0 [("z", CstI 17)];;
 
-let e6s2 = nsubst e6s0 [("z", Prim("-", CstI 5, CstI 4))];;
+// let e6s2 = nsubst e6s0 [("z", Prim("-", CstI 5, CstI 4))];;
 
-let e6s3 = nsubst e6s0 [("z", Prim("+", Var "z", Var "z"))];;
+// let e6s3 = nsubst e6s0 [("z", Prim("+", Var "z", Var "z"))];;
 
-// Shows that only z outside the Let gets substituted:
-let e7s0 = Prim("+", Let("z", CstI 22, Prim("*", CstI 5, Var "z")),
-                   Var "z");;
+// // Shows that only z outside the Let gets substituted:
+// let e7s0 = Prim("+", Let("z", CstI 22, Prim("*", CstI 5, Var "z")),
+//                    Var "z");;
 
-let e7s1 = nsubst e7s0 [("z", CstI 100)];;
+// let e7s1 = nsubst e7s0 [("z", CstI 100)];;
 
-// Shows that only the z in the Let rhs gets substituted
-let e8s0 = Let("z", Prim("*", CstI 22, Var "z"), Prim("*", CstI 5, Var "z"));;
+// // Shows that only the z in the Let rhs gets substituted
+// let e8s0 = Let("z", Prim("*", CstI 22, Var "z"), Prim("*", CstI 5, Var "z"));;
 
-let e8s1 = nsubst e8s0 [("z", CstI 100)];;
+// let e8s1 = nsubst e8s0 [("z", CstI 100)];;
 
-// Shows (wrong) capture of free variable z under the let:
-let e9s0 = Let("z", CstI 22, Prim("*", Var "y", Var "z"));;
+// // Shows (wrong) capture of free variable z under the let:
+// let e9s0 = Let("z", CstI 22, Prim("*", Var "y", Var "z"));;
 
-let e9s1 = nsubst e9s0 [("y", Var "z")];;
+// let e9s1 = nsubst e9s0 [("y", Var "z")];;
 
-// 
-let e9s2 = nsubst e9s0 [("z", Prim("-", CstI 5, CstI 4))];;
+// // 
+// let e9s2 = nsubst e9s0 [("z", Prim("-", CstI 5, CstI 4))];;
 
 let newVar : string -> string = 
     let n = ref 0
@@ -178,31 +185,33 @@ let newVar : string -> string =
 
 (* Correct, capture-avoiding substitution *)
 
-let rec subst (e : expr) (env : (string * expr) list) : expr =
-    match e with
-    | CstI i -> e
-    | Var x  -> lookOrSelf env x
-    | Let(x, erhs, ebody) ->
-      let newx = newVar x
-      let newenv = (x, Var newx) :: remove env x
-      Let(newx, subst erhs env, subst ebody newenv)
-    | Prim(ope, e1, e2) -> Prim(ope, subst e1 env, subst e2 env)
+//outcommented function subst until needed - causes compile errors because of let
 
-let e6s1a = subst e6 [("z", CstI 17)];;
+// let rec subst (e : expr) (env : (string * expr) list) : expr =
+//     match e with
+//     | CstI i -> e
+//     | Var x  -> lookOrSelf env x
+//     | Let(x, erhs, ebody) ->
+//       let newx = newVar x
+//       let newenv = (x, Var newx) :: remove env x
+//       Let(newx, subst erhs env, subst ebody newenv)
+//     | Prim(ope, e1, e2) -> Prim(ope, subst e1 env, subst e2 env)
 
-let e6s2a = subst e6 [("z", Prim("-", CstI 5, CstI 4))];;
+// let e6s1a = subst e6 [("z", CstI 17)];;
 
-let e6s3a = subst e6 [("z", Prim("+", Var "z", Var "z"))];;
+// let e6s2a = subst e6 [("z", Prim("-", CstI 5, CstI 4))];;
+
+// let e6s3a = subst e6 [("z", Prim("+", Var "z", Var "z"))];;
 
 
 // Shows renaming of bound variable z (to z1)
-let e7s1a = subst e7s0 [("z", CstI 100)];;
+// let e7s1a = subst e7s0 [("z", CstI 100)];;
 
-// Shows renaming of bound variable z (to z2)
-let e8s1a = subst e8s0 [("z", CstI 100)];;
+// // Shows renaming of bound variable z (to z2)
+// let e8s1a = subst e8s0 [("z", CstI 100)];;
 
-// Shows renaming of bound variable z (to z3), avoiding capture of free z
-let e9s1a = subst e9s0 [("y", Var "z")];;
+// // Shows renaming of bound variable z (to z3), avoiding capture of free z
+// let e9s1a = subst e9s0 [("y", Var "z")];;
 
 (* ---------------------------------------------------------------------- *)
 
@@ -249,8 +258,8 @@ let rec freevars e : string list =
 
 (* Alternative definition of closed *)
 
-let closed2 e = (freevars e = []);;
-let _ = List.map closed2 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
+// let closed2 e = (freevars e = []);;
+// let _ = List.map closed2 [e1;e2;e3;e4;e5;e6;e7;e8;e9;e10]
 
 (* ---------------------------------------------------------------------- *)
 
@@ -357,9 +366,9 @@ let rec rcomp (e : expr) : rinstr list =
     | Prim _            -> failwith "unknown primitive";;
             
 (* Correctness: eval e []  equals  reval (rcomp e) [] *)
-eval e0 [];;
-rcomp e0;;
-reval (rcomp e0) [];;
+// eval e0 [];;
+// rcomp e0;;
+// reval (rcomp e0) [];;
 
 
 
@@ -401,8 +410,16 @@ let rec scomp (e : expr) (cenv : stackvalue list) : sinstr list =
     match e with
     | CstI i -> [SCstI i]
     | Var x  -> [SVar (getindex cenv (Bound x))]
-    | Let(x, erhs, ebody) -> 
-          scomp erhs cenv @ scomp ebody (Bound x :: cenv) @ [SSwap; SPop]
+    //updated let pattern to match the new list type
+    | Let(xs, ebody) -> 
+        let rec aux bindings cenv = 
+            match bindings with
+            | [] -> scomp ebody cenv
+            | (x, erhs) :: xs ->
+                let xval = scomp erhs cenv
+                let cenv1 = Bound x :: cenv
+                xval @ aux xs cenv1 @ [SSwap; SPop]
+        aux xs cenv
     | Prim("+", e1, e2) -> 
           scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SAdd] 
     | Prim("-", e1, e2) -> 
@@ -411,10 +428,10 @@ let rec scomp (e : expr) (cenv : stackvalue list) : sinstr list =
           scomp e1 cenv @ scomp e2 (Value :: cenv) @ [SMul] 
     | Prim _ -> failwith "scomp: unknown operator";;
 
-let s1 = scomp e1 [];;
-let s2 = scomp e2 [];;
-let s3 = scomp e3 [];;
-let s5 = scomp e5 [];;
+// let s1 = scomp e1 [];;
+// let s2 = scomp e2 [];;
+// let s3 = scomp e3 [];;
+// let s5 = scomp e5 [];;
 
 (* Output the integers in list inss to the text file called fname: *)
 
@@ -422,6 +439,27 @@ let intsToFile (inss : int list) (fname : string) =
     let text = String.concat " " (List.map string inss)
     System.IO.File.WriteAllText(fname, text);;
 
+
+//2.4
+let rec assemble (lst : sinstr list) : int list =
+    match lst with
+    | [] -> []
+    | x :: xs -> 
+        match x with
+        | SCstI i -> 0 :: i :: assemble xs
+        | SVar i -> 1 :: i :: assemble xs
+        | SAdd -> 2 :: assemble xs
+        | SSub -> 3 :: assemble xs
+        | SMul -> 4 :: assemble xs
+        | SPop -> 5 :: assemble xs
+        | SSwap -> 6 :: assemble xs
+
+//let bytecomp (e : expr) : int list =
+//    [] |> scomp e |> assemble
+
+//2.5 modified version of the compiler we made in 2.4
+let bytecomp (e : expr) : unit =
+    ([] |> scomp e |> assemble |> intsToFile) "getInstructions"
 
 
 (* -----------------------------------------------------------------  *)
