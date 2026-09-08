@@ -458,6 +458,7 @@ let rec assemble (lst : sinstr list) : int list =
 //    [] |> scomp e |> assemble
 
 //2.5 modified version of the compiler we made in 2.4
+//The machine.java file was already modified, so we haven't touched it?
 let bytecomp (e : expr) : unit =
     ([] |> scomp e |> assemble |> intsToFile) "getInstructions"
 
