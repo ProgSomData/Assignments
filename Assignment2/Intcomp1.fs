@@ -462,5 +462,4 @@ let rec assemble (lst : sinstr list) : int list =
 let bytecomp (e : expr) : unit =
     ([] |> scomp e |> assemble |> intsToFile) "getInstructions"
 
-
 (* -----------------------------------------------------------------  *)
