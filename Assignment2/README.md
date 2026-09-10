@@ -39,4 +39,5 @@ Since the NAME in the start of the let is not an expr, we don't translate it
 Rightmost derivation:
 A -> F -> H -> -> G -> C -> C -> B -> E -> C
 
-
+3.4
+![tree](derivation.png)
