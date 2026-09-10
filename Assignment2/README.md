@@ -4,8 +4,8 @@
 Exercise 3.2
 The regex we wrote: 
 (b | ab)* (a | ε)
-
-
+![tree](nfa1.png)
+![tree](dfa.png)
 
 Exercise 3.3
 The string is the following:
