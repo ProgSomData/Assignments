@@ -3,7 +3,7 @@
 
 Exercise 3.2
 The regex we wrote: 
-b*(a?b+)*a?
+(b | ab)* (a | ε)
 
 
 
