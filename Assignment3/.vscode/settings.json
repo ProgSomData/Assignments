@@ -1,0 +1,5 @@
+{
+    "FSharp.FSIExtraInteractiveParameters": [
+        "--use:Expr/fsi-init.fsx"
+    ]
+}
