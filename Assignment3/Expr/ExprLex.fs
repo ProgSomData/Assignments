@@ -21,9 +21,14 @@ let keyword s =
     | "let" -> LET
     | "in"  -> IN
     | "end" -> END
+    //Exercise 3.7
+    //Added the if, then, else to lexer
+    | "if" -> IF
+    | "then" -> THEN
+    | "else" -> ELSE 
     | _     -> NAME s
 
-# 26 "ExprLex.fs"
+# 31 "ExprLex.fs"
 let trans : uint16[] array = 
     [| 
     (* State 0 *)
@@ -64,64 +69,64 @@ let rec _fslex_dummy () = _fslex_dummy()
 and Token  lexbuf =
   match _fslex_tables.Interpret(0,lexbuf) with
   | 0 -> ( 
-# 26 "ExprLex.fsl"
+# 31 "ExprLex.fsl"
                                      Token lexbuf 
-# 69 "ExprLex.fs"
-          )
-  | 1 -> ( 
-# 27 "ExprLex.fsl"
-                                     lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf 
 # 74 "ExprLex.fs"
           )
-  | 2 -> ( 
-# 28 "ExprLex.fsl"
-                                     CSTINT (System.Int32.Parse (lexemeAsString lexbuf)) 
+  | 1 -> ( 
+# 32 "ExprLex.fsl"
+                                     lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf 
 # 79 "ExprLex.fs"
           )
-  | 3 -> ( 
-# 30 "ExprLex.fsl"
-                                     keyword (lexemeAsString lexbuf) 
+  | 2 -> ( 
+# 33 "ExprLex.fsl"
+                                     CSTINT (System.Int32.Parse (lexemeAsString lexbuf)) 
 # 84 "ExprLex.fs"
           )
-  | 4 -> ( 
-# 31 "ExprLex.fsl"
-                                     PLUS  
+  | 3 -> ( 
+# 35 "ExprLex.fsl"
+                                     keyword (lexemeAsString lexbuf) 
 # 89 "ExprLex.fs"
           )
-  | 5 -> ( 
-# 32 "ExprLex.fsl"
-                                     MINUS 
+  | 4 -> ( 
+# 36 "ExprLex.fsl"
+                                     PLUS  
 # 94 "ExprLex.fs"
           )
-  | 6 -> ( 
-# 33 "ExprLex.fsl"
-                                     TIMES 
+  | 5 -> ( 
+# 37 "ExprLex.fsl"
+                                     MINUS 
 # 99 "ExprLex.fs"
           )
-  | 7 -> ( 
-# 34 "ExprLex.fsl"
-                                     EQ    
+  | 6 -> ( 
+# 38 "ExprLex.fsl"
+                                     TIMES 
 # 104 "ExprLex.fs"
           )
-  | 8 -> ( 
-# 35 "ExprLex.fsl"
-                                     LPAR  
+  | 7 -> ( 
+# 39 "ExprLex.fsl"
+                                     EQ    
 # 109 "ExprLex.fs"
           )
-  | 9 -> ( 
-# 36 "ExprLex.fsl"
-                                     RPAR  
+  | 8 -> ( 
+# 40 "ExprLex.fsl"
+                                     LPAR  
 # 114 "ExprLex.fs"
           )
-  | 10 -> ( 
-# 37 "ExprLex.fsl"
-                                     EOF   
+  | 9 -> ( 
+# 41 "ExprLex.fsl"
+                                     RPAR  
 # 119 "ExprLex.fs"
           )
-  | 11 -> ( 
-# 38 "ExprLex.fsl"
-                                     failwith "Lexer error: illegal symbol" 
+  | 10 -> ( 
+# 42 "ExprLex.fsl"
+                                     EOF   
 # 124 "ExprLex.fs"
+          )
+  | 11 -> ( 
+# 43 "ExprLex.fsl"
+                                     failwith "Lexer error: illegal symbol" 
+# 129 "ExprLex.fs"
           )
   | _ -> failwith "Token"
 

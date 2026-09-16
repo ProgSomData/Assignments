@@ -12,7 +12,9 @@
 %token END IN LET
 %token LPAR RPAR
 %token EOF
-
+//Exercise 3.7
+//Added the if, then, else to parser
+%token IF ELSE THEN
 %left MINUS PLUS        /* lowest precedence  */
 %left TIMES             /* highest precedence */
 
@@ -33,5 +35,8 @@ Expr:
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)   }
   | Expr TIMES Expr                     { Prim("*", $1, $3) }
   | Expr PLUS  Expr                     { Prim("+", $1, $3) }  
-  | Expr MINUS Expr                     { Prim("-", $1, $3) } 
+  | Expr MINUS Expr                     { Prim("-", $1, $3) }
+  //Exercise 3.7
+  //Added the if, then, else to parser
+  | IF Expr THEN Expr ELSE Expr         { If($2, $4, $6)    }
 ;
