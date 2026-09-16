@@ -8,7 +8,8 @@
   <ItemGroup>
     <Compile Include="Intro2.fs" />
     <Compile Include="Intcomp1.fs" />
-    <ProjectReference Include="Expr\parse.fsproj" /> 
+    <ProjectReference Include="Expr\ExprParse.fsproj" /> 
+    <ProjectReference Include="Fun\Parse.fsproj" />
   </ItemGroup>
 
 </Project>
