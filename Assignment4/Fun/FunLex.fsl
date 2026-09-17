@@ -30,6 +30,7 @@ let keyword s =
     | "not"   -> NOT
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
+    | "fun"   -> FUN          // Exercise 6.3: added fun to lexer
     | _       -> NAME s
 }
 
@@ -57,6 +58,7 @@ rule Token = parse
   | '%'             { MOD }
   | '('             { LPAR }
   | ')'             { RPAR }
+  | "->"            { ARROW } //Exercise 6.3: added for the lambda
   | eof             { EOF }
   | _               { failwith "Lexer error: illegal symbol" }
 

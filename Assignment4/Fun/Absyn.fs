@@ -12,3 +12,4 @@ type expr =
   //Exercise 4.3 extended to take in multiple variables in letfun
   | Letfun of string * string list * expr * expr    (* (f, xs, fBody, letBody) *)
   | Call of expr * expr list (* (f, xs) *)
+  | Fun of string * expr       // Exercise 6.2: added Fun to AST

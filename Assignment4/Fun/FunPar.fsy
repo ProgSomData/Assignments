@@ -16,6 +16,7 @@
 %token EQ NE GT LT GE LE AND OR          //Exercise 4.5: added AND OR
 %token LPAR RPAR 
 %token EOF
+%token FUN ARROW //Exercise 6.3: lambda arrow added
 
 %left ELSE              /* lowest precedence  */
 %left OR                //Exercise 4.5: added AND OR
@@ -67,6 +68,7 @@ AtExpr:
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
   | LET NAME Param EQ Expr IN Expr END  { Letfun($2, $3, $5, $7) }    //Exercise 4.4: added param so letFun takes in list of parameters instead of one.
   | LPAR Expr RPAR                      { $2                     }
+  | FUN NAME ARROW Expr                 { Fun($2, $4)            }    //Exercise 6.3: added lambda rule
 ;
 
 AppExpr:

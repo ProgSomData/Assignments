@@ -65,6 +65,7 @@ let rec eval (e : expr) (env : value env) : value =
       let fClosure = eval eFun env    // Different from Fun.fs - to enable first class functions
       let xVals = List.map (fun eArg -> eval eArg env) eArgs
       apply fClosure xVals
+    | Fun (x, body) -> Closure("", [x], body, env)      //Exercise 6.2: added Lambda Fun to eval
 
   and apply fVal xVals =
     match fVal with
