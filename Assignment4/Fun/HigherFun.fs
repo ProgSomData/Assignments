@@ -87,7 +87,7 @@ let rec eval (e : expr) (env : value env) : value =
 let run e = eval e [];;
 
 (* Examples in abstract syntax *)
-
+(*
 let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
                  Call(Var "f1", CstI 12));
 
@@ -148,3 +148,5 @@ let twAdd1C2 =
     ("app", "y", Call (Var "g", Call (Var "g", Var "y")),
      [("g", Closure ("add1", "x", Prim ("+", Var "x", CstI 1), []))])
 let res2 = eval (Call(Var "twAdd1C2", CstI 1)) [("twAdd1C2",twAdd1C2)]
+
+*)
