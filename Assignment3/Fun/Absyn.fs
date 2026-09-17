@@ -9,6 +9,6 @@ type expr =
   | Let of string * expr * expr
   | Prim of string * expr * expr
   | If of expr * expr * expr
-  //Exercise 4.2 extended to take in multiple variables in letfun
+  //Exercise 4.3 extended to take in multiple variables in letfun
   | Letfun of string * string list * expr * expr    (* (f, xs, fBody, letBody) *)
   | Call of expr * expr list (* (f, xs) *)

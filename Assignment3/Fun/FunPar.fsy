@@ -27,6 +27,10 @@
 %start Main
 %type <Absyn.expr> Main Expr AtExpr Const
 %type <Absyn.expr> AppExpr
+//Exercise 4.4
+//Added  
+%type <string list> Param
+%type <Absyn.expr list> Args
 
 %%
 
@@ -56,16 +60,28 @@ AtExpr:
     Const                               { $1                     }
   | NAME                                { Var $1                 }
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
-  | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
+  | LET NAME Param EQ Expr IN Expr END  { Letfun($2, $3, $5, $7) }      //Exercise 4.4: added param so letFun takes in list of parameters instead of one.
   | LPAR Expr RPAR                      { $2                     }
 ;
 
 AppExpr:
-    AtExpr AtExpr                       { Call($1, $2)           }
-  | AppExpr AtExpr                      { Call($1, $2)           }
+    AtExpr Args                         { Call($1, $2)           }
+  //| AppExpr Args                        { Call($1, $2)           }  //Exercise 4.4: rule is superfluous since we dont need to use call recursively with one argument at a time anymore
 ;
 
 Const:
     CSTINT                              { CstI($1)               }
   | CSTBOOL                             { CstB($1)               }
+;
+
+//Exercise 4.4
+//we add 
+Param:
+    NAME                                  { [$1]                    }
+  | NAME Param                            { $1 :: $2                }
+;
+
+Args:
+    AtExpr                                { [$1]                    }
+  | AtExpr Args                           { $1 :: $2                }
 ;

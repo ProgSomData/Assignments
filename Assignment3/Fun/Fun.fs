@@ -60,8 +60,6 @@ let rec eval (e : expr) (env : value env) : int =
     | Letfun(f, xs, fBody, letBody) -> 
       let bodyEnv = (f, Closure(f, xs, fBody, env)) :: env 
       eval letBody bodyEnv
-
-      //We change the call function to reflect the change we made in Absyn.fs and CLosure
     // | Call(Var f, eArg) -> 
     //   let fClosure = lookup env f
     //   match fClosure with
@@ -70,6 +68,8 @@ let rec eval (e : expr) (env : value env) : int =
     //     let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
     //     eval fBody fBodyEnv
     //   | _ -> failwith "eval Call: not a function"
+    //Exercise 4.3       
+    //We change the call function to reflect the change we made in Absyn.fs and CLosure
     | Call (Var f , eArgs) ->
       let fClosure = lookup env f
       match fClosure with
