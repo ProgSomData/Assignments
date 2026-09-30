@@ -1,6 +1,6 @@
 # Assignment 5
 
-6.5
+6.5 (1)
 
 let f x = 1 in f f end:
 the type is an int because for every value of f it will return 1.
@@ -12,6 +12,39 @@ let f x = let g y = if true then y else x in g false end in f 42 end:
 it is not typable. because in this case the if else can return x which is an int or y which is a boolean.
 let f x = let g y = if true then y else x in g false end in f true end:
 it is a boolean. it will either return x which is true or y which is false. both are boolean. 
+
+6.5 (2)
+bool -> bool
+inferType (fromString "let f x = if x then true else false in f end");;
+val it: string = "(bool -> bool)"
+
+int -> int
+inferType (fromString "let f x = x + 1 in f end");;             
+val it: string = "(int -> int)"
+
+int -> int -> int
+inferType (fromString "let f x = let f y = x + y + 1 in f end in f end");; 
+val it: string = "(int -> (int -> int))"
+
+’a -> ’b -> ’a
+inferType (fromString "let f x = let g y = x   in g  end in f end");;
+val it: string = "('h -> ('g -> 'h))"
+
+’a -> ’b -> ’b
+inferType (fromString "let f x = let g y = y   in g  end in f end");;    
+val it: string = "('g -> ('h -> 'h))"
+
+(’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
+inferType (fromString "let compose f = let h g = let k x = g (f x) in k end in h end in compose end");;
+val it: string = "(('l -> 'k) -> (('k -> 'm) -> ('l -> 'm)))"
+
+’a -> ’b
+inferType (fromString "let f g = let g = g in f g end in f end ");;       
+val it: string = "('e -> 'f)"
+
+’a
+inferType (fromString "let f x = let g y = if true then g y else g y in g g end in f f end");;                                             
+val it: string = "'n"
 
 (i)
 As x is not used in the functionbody of f, there is no type-constraint on it's type.
