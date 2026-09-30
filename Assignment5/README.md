@@ -194,3 +194,7 @@ prints out the solution to the
 
 
 7.2
+Check the 7.2 folder for our solutions.
+
+7.3
+We updated the lexer and parser with "for", then outcommented the old while loops and used for loops instead.
