@@ -252,7 +252,7 @@ let rec typ (lvl : int) (env : tenv) (e : expr) : typ =
       unify TypB (typ lvl env e1);
       unify t2 t3;
       t2
-    | Letfun(f, x, fBody, letBody) -> 
+    | Letfun(f, [x], fBody, letBody) -> 
       let lvl1 = lvl + 1
       let fTyp = TypV(newTypeVar lvl1)
       let xTyp = TypV(newTypeVar lvl1)
@@ -263,13 +263,17 @@ let rec typ (lvl : int) (env : tenv) (e : expr) : typ =
       let bodyEnv = (f, generalize lvl fTyp) :: env
       let _ = debug ("Letfun letBodyEnv: " + (showTEnv bodyEnv))
       typ lvl bodyEnv letBody
-    | Call(eFun, eArg) ->
+    | Letfun(f, _, _, _) ->
+        failwith ("type inference only supports one-parameter functions: " + f)
+    | Call(eFun, [eArg]) ->
       let _ = debug ("Type Call: " + (showTEnv env))
       let tf = typ lvl env eFun 
       let tx = typ lvl env eArg
       let tr = TypV(newTypeVar lvl)
       unify tf (TypF(tx, tr));
       tr
+    | Call(_, _) ->
+        failwith "type inference only supports calls with one argument"
 
 (* Type inference: tyinf e0 returns the type of e0, if any *)
 
