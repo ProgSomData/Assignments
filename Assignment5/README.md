@@ -1,6 +1,11 @@
 # Assignment 5
 
 6.5
+
+let f x = 1 in f f end:
+this returns 1 for every value.
+let f g = g g in f end:
+
 (i)
 As x is not used in the functionbody of f, there is no type-constraint on it's type.
 
