@@ -1,4 +1,19 @@
 # Assignment 5
+6.4
+(i)
+As x is not used in the functionbody of f, there is no type-constraint on it's type.
+
+
+since α is not free in the outer environment, we generalize it, and we have to derive the polymorphic type ∀α. α -> int
+
+This is why we derive f: ∀α. α -> int, as we cannot know what type argument x is.
+
+(ii)
+In the function body of f, x is constrained to int by x < 10 (p5), the 42 in the then branch (p1), therefore the else part of x+1 (p4), which leaves no type variables left to generalize and making f's type int -> int.
+
+
+![pic](billede)
+
 
 6.5 (1)
 
@@ -45,17 +60,3 @@ val it: string = "('e -> 'f)"
 ’a
 inferType (fromString "let f x = let g y = if true then g y else g y in g g end in f f end");;                                             
 val it: string = "'n"
-
-(i)
-As x is not used in the functionbody of f, there is no type-constraint on it's type.
-
-
-since α is not free in the outer environment, we generalize it, and we have to derive the polymorphic type ∀α. α -> int
-
-This is why we derive f: ∀α. α -> int, as we cannot know what type argument x is.
-
-(ii)
-In the function body of f, x is constrained to int by x < 10 (p5), the 42 in the then branch (p1), therefore the else part of x+1 (p4), which leaves no type variables left to generalize and making f's type int -> int.
-
-
-![pic](billede)
