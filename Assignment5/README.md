@@ -3,8 +3,15 @@
 6.5
 
 let f x = 1 in f f end:
-this returns 1 for every value.
+the type is an int because for every value of f it will return 1.
 let f g = g g in f end:
+it is not typable. because we cant defer the type of either f or g we just no g is recursive.
+let f x = let g y = y in g false end in f 42 end:
+its a boolean. when x is 42 f x = g y = in which y would be false so it returns false which is a boolean.
+let f x = let g y = if true then y else x in g false end in f 42 end:
+it is not typable. because in this case the if else can return x which is an int or y which is a boolean.
+let f x = let g y = if true then y else x in g false end in f true end:
+it is a boolean. it will either return x which is true or y which is false. both are boolean. 
 
 (i)
 As x is not used in the functionbody of f, there is no type-constraint on it's type.
