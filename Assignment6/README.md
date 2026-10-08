@@ -137,8 +137,10 @@ L2:
     RET 1
     
 ### 8.3
+
   |PreInc acc     -> cAccess acc varEnv funEnv @ [DUP;LDI;CSTI 1; ADD; STI]
-  | PreDec acc     -> cAccess acc varEnv funEnv @ [DUP;LDI;CSTI 1; SUB; STI]
+  
+  |PreDec acc     -> cAccess acc varEnv funEnv @ [DUP;LDI;CSTI 1; SUB; STI]
     
 ### 8.4
     its much slower because 1 its running 4 times as many instructions and 2 prog1 keeps the counter in the stack where ex08 keep it in memory. so it has to get the pointer value decrement it at clear the stack at each step. it also has 1 instruction incsp 0 that does nothing. 
