@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\parse.fsproj": {}
+    "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\parse.fsproj": {
+    "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\parse.fsproj",
+        "projectUniqueName": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj",
         "projectName": "parse",
-        "projectPath": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\parse.fsproj",
-        "packagesPath": "C:\\Users\\dajap\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\obj\\",
+        "projectPath": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj",
+        "packagesPath": "C:\\Users\\noahl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dajap\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\noahl\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

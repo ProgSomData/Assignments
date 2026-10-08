@@ -5,16 +5,16 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\dajap\.nuget\packages\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\noahl\.nuget\packages\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">7.0.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\dajap\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\noahl\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\dajap\.nuget\packages\fsharp.core\10.0.103</PkgFSharp_Core>
-    <PkgFsLexYacc_Runtime Condition=" '$(PkgFsLexYacc_Runtime)' == '' ">C:\Users\dajap\.nuget\packages\fslexyacc.runtime\11.3.0</PkgFsLexYacc_Runtime>
-    <PkgFsLexYacc Condition=" '$(PkgFsLexYacc)' == '' ">C:\Users\dajap\.nuget\packages\fslexyacc\11.3.0</PkgFsLexYacc>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\noahl\.nuget\packages\fsharp.core\10.0.103</PkgFSharp_Core>
+    <PkgFsLexYacc_Runtime Condition=" '$(PkgFsLexYacc_Runtime)' == '' ">C:\Users\noahl\.nuget\packages\fslexyacc.runtime\11.3.0</PkgFsLexYacc_Runtime>
+    <PkgFsLexYacc Condition=" '$(PkgFsLexYacc)' == '' ">C:\Users\noahl\.nuget\packages\fslexyacc\11.3.0</PkgFsLexYacc>
   </PropertyGroup>
 </Project>

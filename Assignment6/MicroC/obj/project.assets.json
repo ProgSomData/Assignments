@@ -240,19 +240,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dajap\\.nuget\\packages\\": {}
+    "C:\\Users\\noahl\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\microcc.fsproj",
-      "projectName": "microcc",
-      "projectPath": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\microcc.fsproj",
-      "packagesPath": "C:\\Users\\dajap\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dajap\\OneDrive\\ITU\\5. semester\\Programmer som data\\Assignments\\AssignmentsRepo\\Assignment6\\MicroC\\obj\\",
+      "projectUniqueName": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj",
+      "projectName": "parse",
+      "projectPath": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\parse.fsproj",
+      "packagesPath": "C:\\Users\\noahl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\noahl\\Assignments\\Assignment6\\MicroC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dajap\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\noahl\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
