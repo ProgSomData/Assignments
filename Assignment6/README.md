@@ -136,6 +136,18 @@ L2:
     INCSP -1
     INCSP 0
     RET 1
+
+
+
+x03.out 4
+0 1 2 3 
+Used 0.016 seconds
+
+x05.out 4
+16 4 
+Used 0.004 seconds
+
+Check ex3trace.txt for breakdown of the machinetrace code
     
 ### 8.3
 
@@ -150,14 +162,3 @@ L2:
     
 
 The nested scope in ex05.c is apparent, because we allocate a stack slot with incsp 1 and remove it again with incsp -1 before the function returns, shwoing that a local variable exists and is then removed after that block has executed.
-
-
-x03.out 4
-0 1 2 3 
-Used 0.016 seconds
-
-x05.out 4
-16 4 
-Used 0.004 seconds
-
-Check ex3trace.txt for breakdown of the machinetrace code
