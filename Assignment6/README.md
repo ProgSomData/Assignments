@@ -137,7 +137,7 @@ L2:
     INCSP 0
     RET 1
 
-
+The nested scope in ex05.c is apparent, because we allocate a stack slot with incsp 1 and remove it again with incsp -1 before the function returns, shwoing that a local variable exists and is then removed after that block has executed
 
 x03.out 4
 0 1 2 3 
@@ -160,5 +160,3 @@ Check ex3trace.txt for breakdown of the machinetrace code
     (ii)
     there are some jumps that lead straight to another jump like l8 goto l6. there is alot of recomputation to keep the value in memory instead of the stack. incsp is also there twice which doesnt do anything. he loops doesnt test the conditionals when the values are computed.
     
-
-The nested scope in ex05.c is apparent, because we allocate a stack slot with incsp 1 and remove it again with incsp -1 before the function returns, shwoing that a local variable exists and is then removed after that block has executed.
