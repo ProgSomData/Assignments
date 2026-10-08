@@ -1,7 +1,8 @@
 # Assignment 6
-### 7.4
+### 7.4 & 7.5
 
-### 7.5
+Check absyn.fs, cLex.fs, CPar.fs and interp.fs to see changes.
+We added the PreInc and PreDec as described in the book and added comments to the files.
 
 ### 8.1
 
@@ -81,38 +82,38 @@ val it: Machine.instr list =
     STOP
 
 L1:
-    INCSP 1                 grow stack      
-    GETBP                   load base ptr bp
-    CSTI 1                  push constant i onto stack
+    INCSP 1                 int r;      
+    GETBP                   
+    CSTI 1                  
     ADD                     
     GETBP
     CSTI 0
     ADD
     LDI
-    STI
+    STI                     r = n;
     INCSP -1
     INCSP 1
     GETBP
     CSTI 0
     ADD
-    LDI
+    LDI                      
     GETBP
     CSTI 2
     ADD
-    CALL (2, "L2")
+    CALL (2, "L2")          square(n, &r);
     INCSP -1
     GETBP
     CSTI 2
     ADD
     LDI
-    PRINTI
+    PRINTI                  print(r); the rvalue on bp+2
     INCSP -1
     INCSP -1
     GETBP
     CSTI 1
     ADD
     LDI
-    PRINTI
+    PRINTI                  print(r); the rvalue on bp+1
     INCSP -1
     INCSP -1
     RET 0
@@ -130,8 +131,8 @@ L2:
     CSTI 0
     ADD
     LDI
-    MUL
-    STI
+    MUL                     
+    STI                     *rp = i * i;
     INCSP -1
     INCSP 0
     RET 1
@@ -147,3 +148,16 @@ L2:
     (ii)
     there are some jumps that lead straight to another jump like l8 goto l6. there is alot of recomputation to keep the value in memory instead of the stack. incsp is also there twice which doesnt do anything. he loops doesnt test the conditionals when the values are computed.
     
+
+The nested scope in ex05.c is apparent, because we allocate a stack slot with incsp 1 and remove it again with incsp -1 before the function returns, shwoing that a local variable exists and is then removed after that block has executed.
+
+
+x03.out 4
+0 1 2 3 
+Used 0.016 seconds
+
+x05.out 4
+16 4 
+Used 0.004 seconds
+
+Check ex3trace.txt for breakdown of the machinetrace code
