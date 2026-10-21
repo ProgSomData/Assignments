@@ -28,6 +28,8 @@ let keyword s =
     | "true"    -> CSTBOOL 1
     | "void"    -> VOID 
     | "while"   -> WHILE 
+    | "switch"  -> SWITCH     //Added for Exercise 8.6
+    | "case"    -> CASE       //Added for Exercise 8.6
     | _         -> NAME s
  
 let cEscape s = 
@@ -74,7 +76,7 @@ rule Token = parse
   | ']'             { RBRACK }
   | ';'             { SEMI }
   | ','             { COMMA }
-  | '?'             { QUESTION }                      //Added for Exercise 8.5
+  | '?'             { QUESTION }                //Added for Exercise 8.5
   | ':'             { COLON }                   //Added for Exercise 8.5
   | "//"            { EndLineComment lexbuf; Token lexbuf }
   | "/*"            { Comment lexbuf; Token lexbuf }

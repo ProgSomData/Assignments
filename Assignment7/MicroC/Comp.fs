@@ -147,6 +147,21 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       [RET (snd varEnv - 1)]
     | Return (Some e) -> 
       cExpr e varEnv funEnv @ [RET (snd varEnv)]
+    | Switch(e, (lst)) ->           (* Added for Exercise 8.6 *)
+      let labend  = newLabel()
+      let cond: instr list = cExpr e varEnv funEnv
+
+      let rec matchCases cases = 
+        match cases with 
+        | [] -> []
+        | (i, s) :: xs ->
+          let labelse = newLabel()
+          [DUP; CSTI i; EQ; IFZERO labelse]
+          @ cStmt s varEnv funEnv
+          @ [GOTO labend; Label labelse]
+          @ matchCases xs
+      cond @ matchCases lst @ [Label labend; INCSP -1]
+
 
 and cStmtOrDec stmtOrDec (varEnv : varEnv) (funEnv : funEnv) : varEnv * instr list = 
     match stmtOrDec with 
