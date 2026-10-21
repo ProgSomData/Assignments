@@ -27,7 +27,7 @@ let keyword s =
     | "return"  -> RETURN
     | "true"    -> CSTBOOL 1
     | "void"    -> VOID 
-    | "while"   -> WHILE         
+    | "while"   -> WHILE 
     | _         -> NAME s
  
 let cEscape s = 
@@ -74,6 +74,8 @@ rule Token = parse
   | ']'             { RBRACK }
   | ';'             { SEMI }
   | ','             { COMMA }
+  | '?'             { QUESTION }                      //Added for Exercise 8.5
+  | ':'             { COLON }                   //Added for Exercise 8.5
   | "//"            { EndLineComment lexbuf; Token lexbuf }
   | "/*"            { Comment lexbuf; Token lexbuf }
   | '"'             { CSTSTRING (String [] lexbuf) }
