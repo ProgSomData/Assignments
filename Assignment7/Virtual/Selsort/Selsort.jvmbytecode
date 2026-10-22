@@ -1,0 +1,93 @@
+// Exercise 9.1 (ii) - JVM bytecode for SelectionSort
+
+// Local variables = the numbers used in iload, istore and iinc:
+// 0 = arr (method argument)
+// 1 = i (outer loop)
+// 2 = least (index of the smallest value)
+// 3 = j (inner loop), later reused for tmp during the swap
+// iload/istore work with local variables; iaload/iastore read/write array elements.
+// The numbers are instruction offsets; branches jump to these addresses, like labels in Micro-C.
+// if_icmpge compares two stack values; goto jumps without checking a condition.
+
+  public static void SelectionSort(int[]);
+    descriptor: ([I)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=4, args_size=1
+      // Start with i = 0.
+         0: iconst_0
+         1: istore_1
+      // Outer loop: keep going while i < arr.length.
+         2: iload_1
+         3: aload_0
+         4: arraylength
+         5: if_icmpge     57
+      // least = i, then start checking the rest of the array from j = i + 1.
+         8: iload_1
+         9: istore_2
+        10: iload_1
+        11: iconst_1
+        12: iadd
+        13: istore_3
+      // Inner loop: check whether j has reached the end of the array.
+        14: iload_3
+        15: aload_0
+        16: arraylength
+        17: if_icmpge     37
+      // Compare arr[j] and arr[least]. If arr[j] is smaller, update least.
+        20: aload_0
+        21: iload_3
+        22: iaload
+        23: aload_0
+        24: iload_2
+        25: iaload
+        26: if_icmpge     31
+        29: iload_3
+        30: istore_2
+      // j++ and jump back to the inner loop condition.
+        31: iinc          3, 1
+        34: goto          14
+      // Store arr[i] in tmp before swapping the values.
+        37: aload_0
+        38: iload_1
+        39: iaload
+        40: istore_3
+      // arr[i] = arr[least].
+        41: aload_0
+        42: iload_1
+        43: aload_0
+        44: iload_2
+        45: iaload
+        46: iastore
+      // arr[least] = tmp. The swap is done.
+        47: aload_0
+        48: iload_2
+        49: iload_3
+        50: iastore
+      // i++ and repeat the outer loop.
+        51: iinc          1, 1
+        54: goto          2
+      // End of the sorting method.
+        57: return
+      LineNumberTable:
+        line 21: 0
+        line 22: 8
+        line 23: 10
+        line 24: 20
+        line 25: 29
+        line 23: 31
+        line 26: 37
+        line 21: 51
+        line 28: 57
+      StackMapTable: number_of_entries = 5
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 253 /* append */
+          offset_delta = 11
+          locals = [ int, int ]
+        frame_type = 16 /* same */
+        frame_type = 250 /* chop */
+          offset_delta = 5
+        frame_type = 249 /* chop */
+          offset_delta = 19

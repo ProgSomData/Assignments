@@ -1,0 +1,12 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "VS Developer Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/k",
+        "call",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools\\VsDevCmd.bat"
+      ]
+    }
+  }
+}
