@@ -504,19 +504,87 @@ void initheap() {
   freelist = &heap[0];
 }
 
+
+//added for exercise 10.2
+void mark(word* p) {
+  if (Color(p[0]) != White) 
+    return;
+  
+  p[0] = Paint(p[0], Black);
+    
+  word length = Length(p[0]);
+  for (int i = 1; i <= length; i++) {
+    word v = p[i];
+    if (!(IsInt(v) || v == NILVALUE))
+    mark((word*)v);
+  }
+}
+
+//added for exercise 10.2
 void markPhase(word s[], word sp) {
   if (!silent) printf("GC[");
   if (!silent) printf("M");
+  for (int i = 0; i <= sp; i++) {
+    word v = s[i];
+    if (!(IsInt(v) || v == NILVALUE))
+      mark((word*)v);
+  }
 }
 
+//added for exercise 10.2
 void sweepPhase() {
   if (!silent) printf(",");
   if (!silent) printf("BS]");
+  word* p = heap;
+
+  while (p < afterHeap) {
+      word length = Length(p[0]);
+    switch (Color(p[0])) {
+      case Blue:  break;
+      case Black: {p[0] = Paint(p[0], White);} break;
+      case White: {
+        p[0] = Paint(p[0], Blue);
+        p[1] = (word)freelist;
+        freelist = p;
+      } break;
+    }
+
+    p += length +1;
+  }
+}
+
+
+//added for exercise 10.3
+void updatedSweepPhase() {
+  if (!silent) printf(",");
+  if (!silent) printf("BS]");
+  word* p = heap;
+
+  while (p < afterHeap) {
+      word length = Length(p[0]);
+    switch (Color(p[0])) {
+      case Blue:  break;
+      case Black: {p[0] = Paint(p[0], White);} break;
+      case White: {
+
+        word* next = p + length + 1;
+        if (next < afterHeap && Color(next[0]) == White) {
+          length = length + Length(next[0]) + 1;
+          p[0] = mkheader(0, length, White);
+        }
+        p[0] = Paint(p[0], Blue);
+        p[1] = (word)freelist;
+        freelist = p;
+      } break;
+    }
+
+    p += length +1;
+  }
 }
 
 void collect(word s[], word sp) {
   markPhase(s, sp);
-  sweepPhase();
+  updatedSweepPhase();
   heapStatistics();
   numGC++;
 }

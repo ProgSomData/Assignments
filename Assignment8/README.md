@@ -1,8 +1,8 @@
-Assignment 8
+# Assignment 8
 
-Exercise 10.1
+## Exercise 10.1
 
-(i)
+### (i)
 
 Add:
 for add, we take the current top 2 elements in the stack (s[sp] and s[sp-1]) and untag them.
@@ -43,9 +43,9 @@ loads the top of the stack onto the word object v, then decrements sp.
 Creates a pointer p like in CAR, then loads v onto that object as the first element (p[1] = v)
 
 
-(ii)
+### (ii)
 
-The header describes Length, Type and Color for an object stored in the heap.
+The header, as described in microvm.c, describes Length, Type and Color for an object stored in the heap.
 in ttttttttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngg :
 tttttttt                                                = block tag, which describes the type of the object.
 nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn    = block length excluding header, which here is 54 bits, which represents 64 bit
@@ -55,12 +55,12 @@ gg                                                      = block color, which des
    gg=10=Black: block is live (after mark, before sweep)
    gg=11=Blue:  block is on the freelist or orphaned
 
-Length(hdr): Extracts the block length from the header by shifting 2 bits to the right and masking out the remaining bits.
+Length(hdr): Extracts the block length from the header by shifting 2 bits to the right, masking the remaining bits.
 Color(hdr): Extracts the last 2 bits of the header, which represent the block's color.
 Paint(hdr, color): Changes the last 2 bits of the header to the specified color, without changing the block tag or length.
 
 
-(iii + iv)
+### (iii + iv)
 The allocate function is used in CONS as mentioned and also in HEAPALLOC,
 which allocates a new heap object with the specified tag and size n.
 
@@ -71,7 +71,21 @@ The garbage collector is also interacted with in allocate(), where:
 If allocate() attempt fails, collect is called to free up memory.
 
 
-10.2
+## 10.2
 markPhase() – runs through the stack and finds living objects.
 mark() – marks an object and follows it's references recursively
 sweepPhase() – runs through the heap and removes white-marked objects.
+
+Output from running ex55.out:
+(base) PS C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment8\MicroVM> .\microvm.exe ex55.out 4    
+2 4 1 3 
+3 1 4 2 
+
+2 
+
+Result value: #1632862818216 
+Used 15 cpu milli-seconds
+Number of GC: 0
+
+
+## 10.3
