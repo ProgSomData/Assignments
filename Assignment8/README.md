@@ -89,3 +89,5 @@ Number of GC: 0
 
 
 ## 10.3
+Extended the sweep phase to check whether two adjacent blocks are both White. If true, the lengths (second header included) are combined, and the first blocks header is updated with a new length.
+The merged block is added to the freelist like the original sweep.
