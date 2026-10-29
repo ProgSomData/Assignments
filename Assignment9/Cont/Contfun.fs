@@ -258,3 +258,30 @@ let ex10 = Letfun("foo", "y", CstI 3, Var "foo")    (* Function foo used as vari
 let ex11 = Prim("foo", CstI 3, CstI 4)              (* Unknown primitime *)
 let ex12 = Let("foo", CstI 3, Call("foo", CstI 4))  (* foo is not a function *)
 let ex13 = Raise (Exn "Uncaught")
+
+
+//added for exercise 11.1
+let rec lenc xs cont = 
+    match xs with
+    | [] ->  cont 0
+    | x::xr -> lenc xr (fun v -> cont (1 + v))
+
+lenc [2; 5; 7] id
+lenc [2; 5; 7] (printf "The answer is ’% d’ \n")
+
+lenc [2; 5; 7] (fun v -> printf "The answer is '%d'\n" (v * 2))
+
+
+let rec leni (lst : int list) (acc : int) : int =
+  match lst with 
+  | [] -> acc
+  | x :: xs -> leni xs (acc + 1)
+
+  leni [2; 5; 7] 0
+
+  
+
+  let rec revc xs cont =
+    match xs with
+    | [] ->  cont [] 
+    | x::xr -> revc xr (fun v ->  cont (v @  [x]))
