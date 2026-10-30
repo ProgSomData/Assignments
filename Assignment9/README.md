@@ -3,8 +3,6 @@
 ## Exercise 11.1
 
 ### (i)
-ts\AssignmentsRepo\Assignment9\Cont\Contfun.fs"\Programmer som data\Assignm
-
 #### lenc xr (fun v -> cont (1 + v))
 > lenc [2; 5; 7] id;;
 val it: int = 3
@@ -17,7 +15,6 @@ val it: unit = ()
 ### (ii)
 #### lenc xs (fun v -> 2*v)
 ents\AssignmentsRepo\Assignment9\Cont\Contfun.fs"\Programmer som data\Assignm
-
 > lenc [2; 5; 7] (fun v -> printf "The answer is '%d'\n" (v * 2));;
 val it: int = 6
 val it: unit = ()
@@ -31,8 +28,46 @@ They are both tail-recursive solutions to the problem presented. First uses a co
 ## 11.2
 
 ### (i)
+> revc [2; 5; 7] (fun v -> v);;
+val it: int list = [7; 5; 2]
 
-let rec rev xs =
-    match xs with
-    | [] -> cont [] 
-    | x::xr -> rev xr (fun v -> cont xr )
+### (ii)
+> revc [2; 5; 7] (fun v -> v @ v);;
+val it: int list = [7; 5; 2; 7; 5; 2]
+
+instead of applying v -> v, we append v @ v, which means we append 2 to (v), which means we append 2 @ [7;5;2], then again with 5 @ [2;7;5;2] and again with 7 @ [5;2;7;5;2], since cont is applied to the entirety of (v @ [x]) in the lambda
+
+### (iii)
+See Contfun.fs
+> revi [2; 5; 7] [];;
+val it: int list = [7; 5; 2]
+
+## 11.3
+See contfun.fs for code
+> prodc [2;5;7] id;;
+val it: int = 70
+
+
+## 11.4
+> prodc [2; 0; 7] id;;
+val it: int = 0
+
+> prodc [2; 0; 7] (printf "The answer is ’% d’ \n");;
+The answer is ’ 0’ 
+val it: unit = ()
+
+> prodc [2; 0; 7] (fun v -> printf "The answer is '%d'\n" (v * 2));;
+The answer is '0'
+val it: unit = ()
+
+
+With id as argument, we can return 0 directly without affecting the result.
+
+With printf, skipping the continuation also skips the printing operation.
+
+If the continuation contains additional operations, an early computation stopapge will change its behaviour and what it returns.
+
+see contfun.fs for prodi function
+
+
+## 11.8

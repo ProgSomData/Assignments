@@ -1,0 +1,5 @@
+C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment9\Cont\obj\Debug\net10.0\Cont.fsproj.AssemblyReference.cache
+C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment9\Cont\obj\Debug\net10.0\Cont.AssemblyInfoInputs.cache
+C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment9\Cont\obj\Debug\net10.0\Cont.AssemblyInfo.fs
+C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment9\Cont\obj\Debug\net10.0\Cont.fsproj.CoreCompileInputs.cache
+C:\Users\dajap\OneDrive\ITU\5. semester\Programmer som data\Assignments\AssignmentsRepo\Assignment9\Cont\obj\Debug\net10.0\Cont.sourcelink.json

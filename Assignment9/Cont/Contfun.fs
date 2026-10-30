@@ -280,8 +280,42 @@ let rec leni (lst : int list) (acc : int) : int =
   leni [2; 5; 7] 0
 
   
+//added for exercise 11.2
+let rec revc xs cont =
+  match xs with
+  | [] ->  cont [] 
+  | x :: xr -> revc xr (fun v -> cont (v @ [x]))
 
-  let rec revc xs cont =
-    match xs with
-    | [] ->  cont [] 
-    | x::xr -> revc xr (fun v ->  cont (v @  [x]))
+revc [2; 5; 7] (fun v -> v)
+
+//(ii)
+revc [2; 5; 7] (fun v -> v @ v)
+
+//(iii)
+let rec revi (xs : 'a list) (acc : 'a list) : 'a list =
+  match xs with
+  | [] -> acc
+  | x :: xr -> revi xr ([x] @ acc)
+
+revi [2; 5; 7] []
+
+//added for Exercise 11.3
+let rec prodc xs cont = 
+  match xs with
+  | [] -> cont 1
+  | x :: xr -> prodc xr (fun v -> cont (x * v))
+
+prodc [2;5;7] id
+
+
+//added for exercise 11.4
+prodc [2; 0; 7] id
+prodc [2; 0; 7] (printf "The answer is ’% d’ \n")
+
+prodc [2; 0; 7] (fun v -> printf "The answer is '%d'\n" (v * 2))
+
+let rec prodi xs acc = 
+  match xs with
+  | [] -> acc
+  | x :: xr when x = 0 -> 0
+  | x :: xr -> prodi xr (acc * x)
