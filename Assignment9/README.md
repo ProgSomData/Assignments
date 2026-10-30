@@ -71,3 +71,20 @@ see contfun.fs for prodi function
 
 
 ## 11.8
+### (i)
+ents\AssignmentsRepo\Assignment9\Cont\Icon.fs"ter\Programmer som data\Assignm
+- run (Every(Write(
+-     Prim("+", Prim("*", CstI 2, FromTo(1, 4)), CstI 1)
+- )));;;;
+3 5 7 9 val it: value = Int 0
+
+### (ii)
+ents\AssignmentsRepo\Assignment9\Cont\Icon.fs"ter\Programmer som data\Assignm
+- run (Write(
+-     Prim("<", CstI 50,
+-         Prim("*", CstI 7, FromTo(1, 20)))
+- ));;;;
+56 val it: value = Int 56
+
+### (iii + iv)
+see icon.fs

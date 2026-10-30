@@ -35,6 +35,7 @@ type expr =
   | Or  of expr * expr
   | Seq of expr * expr
   | Every of expr 
+  | Prim1 of string * expr //added for 11.8
   | Fail;;
 
 (* Runtime values and runtime continuations *)
@@ -98,6 +99,19 @@ let rec eval (e : expr) (cont : cont) (econt : econt) =
     | Every e -> 
       eval e (fun _ -> fun econt1 -> econt1 ())
              (fun () -> cont (Int 0) econt)
+    
+    //added for exercise 11.8
+    | Prim1 (ope, e1) ->
+      eval e1 (fun v econt1 -> 
+        match (ope, v) with
+        | "sqr", Int i   -> cont (Int (i * i)) econt1
+        | "even", Int i  -> if i % 2 = 0 then cont (Int i) econt1 else econt1 ()
+        | "multiples", Int i ->
+            let rec multiples n =
+              cont (Int (n*i)) (fun () -> multiples (n+1))
+            multiples 1
+        | _ -> Str "unknown prim1"
+      ) econt 
     | Fail -> econt ()
 
 let run e = eval e (fun v -> fun _ -> v) (fun () -> (printfn "Failed"; Int 0));
@@ -140,3 +154,16 @@ let ex9 = Every(Write(Prim("<", CstI 4, FromTo(1, 10))));
 
 
 //Added for exercise 11.8
+//(i)
+//#load "Icon.fs";;
+//open Icon;;
+
+run (Every(Write(
+    Prim("+", Prim("*", CstI 2, FromTo(1, 4)), CstI 1)
+)));;
+
+//(ii)
+run (Write(
+    Prim("<", CstI 50,
+        Prim("*", CstI 7, FromTo(1, 20)))
+));;

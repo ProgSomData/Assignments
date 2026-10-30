@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Contfun.cfs" />
+    <Compile Include="Contfun.fs" />
+    <Compile Include="Icon.fs" />
   </ItemGroup>
 
 </Project>
